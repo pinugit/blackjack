@@ -23,22 +23,43 @@ playerWillDeal()
 dealerWillDeal()
 
 while playing :
-    print(playerCards)
-    print(dealerCards)
-    if (sum(playerCards) or sum(dealerCards)) > 21:
-        playing = False
     
-    else :
-        userChoice = str(input("Enter hit(h) of stand(s) : "))[0].upper()
-        if userChoice == "H":
-            playerWillDeal()
+    print("your cards = " +str(playerCards))
+    print("dealer cards = " +str(dealerCards))
+    
+    userChoice = str(input("Enter hit (H) or stand(S): ")).upper()
+    
+    if userChoice == "H":
+        playerWillDeal()
+        if sum(playerCards) > 21:
+            print("your total is " + str(sum(playerCards)) + " which is greater than 21, \nYou Lost!")
+            playing = False
+        elif sum(playerCards) == 21:
+            print("your cards sum 21 their is no way the dealer is winning")
+            playing = False
+        else:
             continue
-        if userChoice == "S":
-            while sum(dealerCards) < sum(playerCards):
-                dealerWillDeal()
-                if sum(dealerCards) > sum(playerCards) and sum(dealerCards) <= 21:
-                    print("dealer win")
-                
+        
+    elif userChoice == "S":
+        while sum(dealerCards) < sum(playerCards):
+            dealerWillDeal()
+            
+            if (sum(dealerCards) > sum(playerCards)) and (sum(dealerCards) <= 21):        
+                print("dealer cards = " +str(dealerCards))
+                print("dealer total is " + str(sum(dealerCards)) + " dealer wins!")
+                playing = False
+                break
+            
+            elif(sum(dealerCards) > 21):
+                print("dealer cards = " +str(dealerCards))
+                print("dealer total is " + str(sum(dealerCards)) + " you win!")
+                playing = False
+                break
+            
+    elif userChoice == "":
+        print("I am seeing you love enter key but please work your little brain and figure out differnt output")
+                      
+print("program ends")
                     
             
     
